@@ -1,5 +1,8 @@
 package exception;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 /**
  * <p>ProjectName: javaclass </p>
  * <p>FileName: ExceptionHandle </p>
@@ -43,12 +46,28 @@ package exception;
     throws可以将某一级发生的异常向上一级抛出，交给上一级处理。
     可以逐级抛出，最后在JVM（最高级）必须处理
     但是JVM处理异常时，当他输出异常信息后就会退出程序。因此我们一般最高只可以throws到main方法这一级
+    throws抛出的可以是他的异常，也可以是他异常的父类
+
+    throws的使用细节：
+    1. 对于编译异常，必须处理，使用try-catch或者throws
+    2. 对于运行异常，可以不用处理，默认用throws抛给了JVM处理
+    3. 子类重写父类的方法并抛出异常时，子类重写的方法所抛出的异常类型，要不是与父类一致，要不是父类抛出异常类型的子类型
+    4. 在throws过程中，如果某一阶段已经有try-catch，就相当于处理了异常，就不必继续throws了
+    5. ※如果throws抛出的是一个运行异常，则调用该方法的地方，即使不处理该异常也不会报错，因为运行异常可以不处理（如果抛出的是一个编译异常则必须处理，否则报错）
+
  */
 
 public class ExceptionHandle {
     public static void main(String[] args) {
         System.out.println(Person.method1()); //4
         System.out.println(Person.method2()); //4
+
+        SubThrows subThrows = new SubThrows();
+        try {
+            subThrows.f1();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
 
@@ -75,7 +94,7 @@ class TryCatch {
             int n1 = 10;
             int n2 = 0;
             int res = n1 / n2; //ArithmeticException
-        } catch (NullPointerException | ArithmeticException e){
+        } catch (NullPointerException | ArithmeticException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -92,6 +111,7 @@ class TryCatch {
         //程序必须执行的代码
         //Exception in thread "main" java.lang.ArithmeticException: / by zero
         //	at exception.TryCatch.main(ExceptionHandle.java:83)
+
 
     }
 }
@@ -120,7 +140,7 @@ class Person {
             System.out.println(e.getMessage());
             return ++i; //虽然这里写了return ++i，但是因为finally代码块的存在，这里并不会返回，而是会继续执行finally的代码，※但是，++i还是会执行
             // 会将i的值保存为一个临时变量temp = 3；
-        }finally {
+        } finally {
             return ++i;
         }
     }
@@ -140,16 +160,33 @@ class Person {
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
             return 3; //虽然这里写了return 3，但是因为finally代码块的存在，这里并不会返回，而是会继续执行finally的代码
-        }finally {
+        } finally {
             return 4;
         }
     }
 }
 
+//3. 子类重写父类的方法并抛出异常时，子类重写的方法所抛出的异常类型，要不是与父类一致，要不是父类抛出异常类型的子类型
 class TestThrows {
-    public void f1() {
-        String str = "XXX";
-        int a = Integer.parseInt(str);
-        System.out.println(a);
+    public void f1() throws Exception {
+//        创建一个文件流对象
+//        使用throws抛出异常，让f1方法的调用者处理
+        FileInputStream fis = new FileInputStream("d://aa.txt");
+    }
+}
+
+class SubThrows extends TestThrows {
+    @Override
+    public void f1() throws FileNotFoundException {
+        FileInputStream fis = new FileInputStream("d://aa.txt");
+    }
+
+    public void f2() {
+//        此处调用f3并不报错，因为f3抛出的是一个运行异常，运行异常可以不做处理
+        f3();
+    }
+
+    public void f3() throws ArithmeticException {
+
     }
 }

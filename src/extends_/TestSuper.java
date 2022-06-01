@@ -1,5 +1,7 @@
 package extends_;
 
+import jdk.swing.interop.SwingInterOpUtils;
+
 /**
  * <p>ProjectName: javaclass </p>
  * <p>FileName: testSuper </p>
@@ -37,5 +39,7 @@ public class TestSuper extends Graduate {
     public static void main(String[] args) {
         TestSuper ts = new TestSuper();
         ts.test();
+//        子类可以直接使用父类中定义的常量，不需要类名.常量名（接口同样适用）
+        System.out.println(PI);
     }
 }

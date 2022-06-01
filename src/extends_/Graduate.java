@@ -12,6 +12,8 @@ package extends_;
  */
 public class Graduate extends Student {
 
+    public static final double PI = 3.14;
+
 
     //    子类继承了所有的属性和方法，非私有的属性和方法（默认属性在同包的前提下）可以直接访问
 //      私有属性和方法不能再子类直接访问，要通过公共的方法去访问

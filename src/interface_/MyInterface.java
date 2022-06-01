@@ -29,6 +29,7 @@ package interface_;
 public interface MyInterface extends TestInter, TestInter2 {
 
     //    接口内声明属性
+//    实现了接口的类中可以直接使用接口中定义的常量（继承同样适用）
 //    等同于public static final double PI = 3.14;
     double PI = 3.14;
 
@@ -54,5 +55,33 @@ class TestMain {
         MyInterface mi; // 正确，声明一个接口对象。
 //        访问接口内声明的属性
         System.out.println(MyInterface.PI);
+    }
+}
+
+class A implements MyInterface {
+    @Override
+    public void start() {
+//        实现了接口的类中可以直接使用接口中定义的常量（继承同样适用）
+        System.out.println(PI);
+    }
+
+    @Override
+    public void end() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public void watch() {
+
+    }
+
+    @Override
+    public void game() {
+
     }
 }

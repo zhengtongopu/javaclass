@@ -10,7 +10,7 @@ import java.util.TreeMap;
  *
  * 基本与TreeSet相同，因为TreeSet的底层就是一个TreeMap
  *
- * 排序时是看key的compareTo()方法，因此key的数据类型必须重写或者继承了compareTo()方法
+ * 排序时是看key的compareTo()方法，因此key的数据类型必须重写或者继承了compareTo()方法(即实现了Comparator接口)
  * <p>Date: 2022-06-08  21:50 </p>
  * <p>@author: <a href="https://github.com/zhengtongopu" rel="nofollow">Zheng Tong</a> </p>
  * <p>@version: 1.0.0 </p>

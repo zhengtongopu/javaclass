@@ -10,7 +10,7 @@ package array;
  * @version v1.0
  * @update [No.][YYYY-MM-DD] [name][description]
  */
-public class Array {
+public class Array_ {
     public static void main(String[] args) {
         //基本数据类型复制，复制方式为值的拷贝
         //n2的变化不会影响到n1的值

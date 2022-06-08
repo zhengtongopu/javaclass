@@ -10,8 +10,12 @@
 查看类的层级关系（继承） ctrl + h
 放在方法变量上，快速定位到方法 ctrl + b
 自动分配变量名，在最后加上.var   如 new Classname().var
+快速查找类图父类的子类： ctrl + alt + b
+展示所有快捷模板： ctrl + j
 
 
 模板快捷键
 sout ： System.out.println
 fori :  for (int i = 0; i < ; i++) {}
+itit :  while(iterator.hasNext()) {}
+I : 增强for循环 for (Object o :) {}

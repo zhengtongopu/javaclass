@@ -66,11 +66,21 @@ public class AnonymousInnerClass {
             public void cry() {
                 System.out.println("匿名内部类作为实参传递1111111111");
             }
+
+            @Override
+            public void say() {
+
+            }
         });
         Outer2.m2(new A() {
             @Override
             public void cry() {
                 System.out.println("匿名内部类作为实参传递2222222222222");
+            }
+
+            @Override
+            public void say() {
+
             }
         });
         /*
@@ -124,6 +134,11 @@ class Outer2 { //外部类
             @Override
             public void cry() {
                 System.out.println("实现接口A的cry方法");
+            }
+
+            @Override
+            public void say() {
+
             }
         };
 
@@ -186,6 +201,8 @@ class Outer2 { //外部类
 
 interface A {
     void cry();
+
+    void say();
 }
 
 class Father {
